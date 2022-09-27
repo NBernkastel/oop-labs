@@ -1,9 +1,7 @@
 package lab2
 
 import java.io.BufferedReader
-import kotlin.math.*;
-
-import java.io.ByteArrayOutputStream
+import kotlin.math.*
 import java.io.InputStream
 import java.io.PrintStream
 
@@ -16,7 +14,7 @@ fun main() {
 fun game(inputStream: InputStream = System.`in`, output: PrintStream = outputConsole, test: Boolean) {
     var currentIndex = 0
     val game = ArrayList<Array<Array<Char>>>()
-    var board: Array<Array<Char>> = arrayOf(arrayOf(' ', ' ', ' '), arrayOf(' ', ' ', ' '), arrayOf(' ', ' ', ' '));
+    var board: Array<Array<Char>> = arrayOf(arrayOf(' ', ' ', ' '), arrayOf(' ', ' ', ' '), arrayOf(' ', ' ', ' '))
     val reader = BufferedReader(inputStream.reader())
     while (true) {
         var point: Pair<Int, Int>
@@ -50,9 +48,9 @@ fun game(inputStream: InputStream = System.`in`, output: PrintStream = outputCon
         if (currentIndex < game.size)
             game[currentIndex] = board.copy()
         else
-            //game.add(board.copy())
-            game.add(board.clone())
-        currentIndex++;
+            game.add(board.copy())
+            //game.add(board.clone())
+        currentIndex++
         if (board.checkWin() == 'X') {
             output.print("X")
             return
