@@ -74,10 +74,10 @@ class MainKtTest : StringSpec({
         board.isFill() shouldBe true
     }
     "pointFromString" {
-        "2 3".pointFromString() shouldBe arrayOf(2, 3)
+        "2 3".pointFromString() shouldBe Pair(2, 3)
     }
     "pointFromString2" {
-        "dfgdfgfg".pointFromString() shouldBe arrayOf(-1, -1)
+        "dfgdfgfg".pointFromString() shouldBe null
     }
     "isRightMove" {
         outputBuffer.reset()
@@ -86,7 +86,7 @@ class MainKtTest : StringSpec({
             arrayOf('0', ' ', '0'),
             arrayOf('0', '0', '0')
         )
-        board.isRightMove(Pair(1,1)) shouldBe true
+        board.isRightMove(Pair(1, 1)) shouldBe true
     }
     "isRightMove1" {
         outputBuffer.reset()
@@ -106,28 +106,28 @@ class MainKtTest : StringSpec({
         )
         board.isRightMove(Pair(20, 2)) shouldBe false
     }
-    "game"{
+    "game" {
         outputBuffer.reset()
         val input = "1 1\n1 2\n0 1\n0 2\n2 1"
-        game(ByteArrayInputStream(input.toByteArray()),output,test = true)
+        game(ByteArrayInputStream(input.toByteArray()), output, test = true)
         outputBuffer.toString() shouldBe "X"
     }
-    "game1"{
+    "game1" {
         outputBuffer.reset()
         val input = "1 1\n0 0\n1 0\n1 2\n2 1\n0 1\n0 2\n2 0\n2 2"
-        game(ByteArrayInputStream(input.toByteArray()),output,test = true)
+        game(ByteArrayInputStream(input.toByteArray()), output, test = true)
         outputBuffer.toString() shouldBe "ничья"
     }
-    "game2"{
+    "game2" {
         val input = "10 1\nпрапр"
         outputBuffer.reset()
-        game(ByteArrayInputStream(input.toByteArray()),output,test = true)
+        game(ByteArrayInputStream(input.toByteArray()), output, test = true)
         outputBuffer.toString() shouldBe "координаты введены неверно\r\n"
     }
-    "game3"{
+    "game3" {
         val input = "1 1\n1 1\nпрапр"
         outputBuffer.reset()
-        game(ByteArrayInputStream(input.toByteArray()),output,test = true)
+        game(ByteArrayInputStream(input.toByteArray()), output, test = true)
         outputBuffer.toString() shouldBe "координаты введены неверно\r\n"
     }
     "area" {
