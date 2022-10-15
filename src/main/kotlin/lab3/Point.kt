@@ -1,6 +1,7 @@
 package lab3
 
-class Point (
+class Point(
     val x: Int,
     val y: Int
-    )
+
+)
