@@ -28,7 +28,7 @@ class Board(val cells: Array<Array<Char>>) {
     }
 
     fun setAndCopy(point: Point, c: Char): lab3.Board {
-        return Board(this.cells.apply { this[point.x][point.y] = c })
+        return Board(this.cells.apply { this[point.x][point.y] = c }.copy())
     }
 
     operator fun get(point: Point): Char {
@@ -39,16 +39,19 @@ class Board(val cells: Array<Array<Char>>) {
         return cells[point[0]][point[1]]
     }
     override fun toString(): String{
-        var s = ""
-        for(cell in cells) {
-          s +="$cell/n"
+        var x:String = ""
+        for (i in cells){
+            for (j in i) {
+                x += "$j "
+            }
+            x += "\n"
         }
-        return s
+        return x
     }
     object Board {
         var size = 3
         fun stringToArray(string: String): Array<Char> {
-            return stringToArray(string)
+            return Array(size){i -> string[i]}
         }
     }
 }

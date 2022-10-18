@@ -6,15 +6,15 @@ class State(
 ){
     val gameResult: String? = if(checkWin()!=' ') "Победил ${checkWin()}"  else null
     fun copy(): State{
-        return this
+        return State(board,turn)
     }
     fun step(point: Point): State?{
-        return if (point.x in board.cells.indices && point.y in board.cells.indices && board[point] == ' '){
-            State(board.setAndCopy(point,turn))
-        } else null
+      //  return if (point.x in board.cells.indices && point.y in board.cells.indices && board[point] == ' '){
+       return State(board.setAndCopy(point,turn),if (turn == 'X') '0' else 'X')
+     //   } else null
     }
     override fun toString(): String{
-        return gameResult ?: (board.cells.toString() + "Ход $turn")
+        return gameResult ?: (board.toString() + "Ход $turn")
     }
     fun checkWin(): Char {
         val winLines = arrayOf(
