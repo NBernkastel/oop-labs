@@ -1,41 +1,50 @@
 package lab3
 
 class Game(state: State = State()) {
-    val states = ArrayList<State>()
-    var indexState = 0
-    val state: State
-        get() {
-            return states[indexState]
-        }
+    private val states = ArrayList<State>()
+    private var indexState = 0
     var gameOver = false
 
     init {
-        states.add(state.copy())
+        if (indexState == 0)
+            states.add(state)
     }
 
+    private val state: State
+        get() {
+            return states[indexState]
+        }
+
     fun step(point: Point): Boolean {
+        state.turn = if (indexState % 2 == 0) 'X' else '0'
+        if(indexState >= states.lastIndex)
+            states.add(state.copyState())
+        indexState++
         return if (state.step(point) != null) {
             if (indexState >= states.lastIndex)
-                states.add(state.step(point)!!)
+                states[indexState]=state.step(point)!!
             else
                 states[indexState] = state.step(point)!!
-            indexState++
             true
-        }
-        else {
+        } else {
             false
         }
     }
-
+    
     fun takeBack(shift: Int): Boolean {
-        return if (indexState-shift >=0){
-            states[indexState] = state.copy()
-            indexState -= shift
+        return if (indexState - shift >= 0) {
+            indexState -= (shift)
+            while (states.lastIndex!=indexState)
+            {
+                states.removeAt(states.lastIndex)
+            }
             true
         } else false
     }
-    override fun toString(): String{
-       return if(gameOver) state.gameResult!! else {"Состояние\n$state Номер хода $indexState\n"}
+
+    override fun toString(): String {
+        return if (gameOver) state.gameResult!! else {
+            "Состояние\n${states[indexState]} Номер хода $indexState\n"
+        }
     }
 }
-// Не работает ход назад проверь как работает текущее состояние state debugom

@@ -1,19 +1,26 @@
 package lab3
+
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.PrintStream
-val outputConsole: PrintStream = PrintStream(System.out, true, "UTF-8")
-fun game(
-    inputStream: InputStream = System.`in`,
-    output: PrintStream = outputConsole
-) {
-    val reader = BufferedReader(inputStream.reader())
 
+val outputConsole: PrintStream =
+    PrintStream(System.out, true, "UTF-8")
+
+fun main() {
+    game()
+}
+
+fun Array<Array<Char>>.copy(): Array<Array<Char>> {
+    return Array(3) { i -> Array(3) { j -> this[i][j] } }
+}
+
+fun game(inputStream: InputStream = System.`in`, output: PrintStream = outputConsole) {
+    val reader = BufferedReader(inputStream.reader())
     val game = Game()
     var finish = false
     output.print(game)
-    do {
-        output.print("Ваш ход или команда\n")
+    do{
         val arr = reader.readLine().split(" ")
         if (arr.size != 2)
             finish = true
@@ -29,15 +36,9 @@ fun game(
                     else
                         output.print("Неправильная команда\n")
                 else
-                    if (game.step(Point(x, y)))
+                    if (game.step(Point(y, x)))
                         output.print(game)
             }
         }
     } while (!finish && !game.gameOver)
 }
-
-
-fun main() {
-    game()
-}
-
