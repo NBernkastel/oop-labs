@@ -11,9 +11,6 @@ fun main() {
     game()
 }
 
-fun Array<Array<Char>>.copy(): Array<Array<Char>> {
-    return Array(3) { i -> Array(3) { j -> this[i][j] } }
-}
 
 fun game(inputStream: InputStream = System.`in`, output: PrintStream = outputConsole) {
     val reader = BufferedReader(inputStream.reader())

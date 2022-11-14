@@ -1,7 +1,5 @@
 package lab3
 
-import lab3.Board.Board.size
-
 class Board(val cells: Array<Array<Char>>) {
     val isFill: Boolean
         get() {
@@ -12,14 +10,14 @@ class Board(val cells: Array<Array<Char>>) {
             return true
         }
 
-    object Board {
+    companion object {
         var size = 3
         fun stringToArray(str: String): Array<Char> {
             return Array(size) { i -> str[i] }
         }
     }
     constructor(str: String) : this(
-        Array(size) { i -> Board.stringToArray(str.substring(3 * i)) })
+        Array(size) { i -> Board.stringToArray(str.substring(size * i)) })
 
     constructor(board: lab3.Board) : this(board.cells.copy())
 
@@ -50,8 +48,7 @@ class Board(val cells: Array<Array<Char>>) {
         }
         return str
     }
-
-    fun copy(): Array<Array<Char>> {
-        return Array(3) { i -> Array(3) { j -> cells[i][j] } }
-    }
+}
+fun Array<Array<Char>>.copy(): Array<Array<Char>> {
+    return Array(size) { i -> Array(size) { j -> this[i][j] } }
 }

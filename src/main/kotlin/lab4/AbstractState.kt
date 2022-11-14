@@ -4,10 +4,10 @@ import lab3.Board
 
 abstract class AbstractState(val board: lab3.Board){
     abstract val gameResult: String?
-    abstract fun copy(): AbstractState
+    abstract fun copyState(): AbstractState
     open fun checkStep(step: Step): Boolean {
         return when {
-            step.y > Board.Board.size || step.x > Board.Board.size -> return false
+            step.y > Board.size || step.x > Board.size -> return false
             board[step.point] != ' ' -> return false
             gameResult != null -> return false
             else -> true

@@ -6,8 +6,7 @@ class MultiGame(state: AbstractState) {
     var gameOver = false
 
     init {
-        if (indexState == 0)
-            states.add(state)
+        states.add(state)
     }
 
     private val state: AbstractState
@@ -15,15 +14,25 @@ class MultiGame(state: AbstractState) {
             return states[indexState]
         }
 
-    fun step(point: lab3.Point): Boolean {
+    fun step(step: Step): Boolean {
         if(indexState >= states.lastIndex)
-            states.add(state.copy())
+            states.add(state.copyState())
         indexState++
-        return if (state.step(point) != null) {
-            if (indexState >= states.lastIndex)
-                states[indexState]=state.step(point)!!
-            else
-                states[indexState] = state.step(point)!!
+        return if (state.step(step) != null) {
+            if (indexState >= states.lastIndex) {
+                states[indexState] = state
+                state.toString()
+                if (state.gameResult != null){
+                    gameOver = true
+                }
+            }
+            else {
+                states[indexState] = state
+                state.toString()
+                if (state.gameResult != null){
+                    gameOver = true
+                }
+            }
             true
         } else {
             false

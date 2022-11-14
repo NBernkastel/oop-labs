@@ -3,18 +3,22 @@ package lab4
 import lab3.Board
 
 class StateXO (board:lab3.Board,var turn:Char) : AbstractState(board){
-    override val gameResult: String? = checkWin(board)
+    override var gameResult: String? = null
 
-    override fun copy(): AbstractState {
-        return StateXO(board,turn)
+    override fun copyState(): AbstractState {
+        return StateXO(Board(board),turn)
     }
-
+    init {
+        if(turn == 'X') turn = '0' else turn = 'X'
+    }
     override fun nextState(step: Step): AbstractState {
-        return StateXO(board.setAndCopy(step.point,turn),if(turn == 'X') '0' else 'X')
+        return StateXO(board.setAndCopy(step.point,turn),turn)
     }
 
     override fun toString(): String {
+        gameResult = checkWin(board)
         return if (board.isFill) {
+            gameResult = "Ничья!"
             ("Ничья!")
         } else {
             return (checkWin(board) ?: board.toString())
