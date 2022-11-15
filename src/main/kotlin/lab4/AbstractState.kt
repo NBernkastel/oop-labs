@@ -2,7 +2,7 @@ package lab4
 
 import lab3.Board
 
-abstract class AbstractState(val board: lab3.Board){
+abstract class AbstractState(val board:Board){
     abstract val gameResult: String?
     abstract fun copyState(): AbstractState
     open fun checkStep(step: Step): Boolean {

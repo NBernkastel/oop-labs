@@ -4,9 +4,9 @@ import lab3.Board
 
 class StateBalda(
     board:Board,
-    val turn: Int = 1,
-    val words1: ArrayList<String> = ArrayList(),
-    val words2: ArrayList<String> = ArrayList(),
+    private val turn: Int = 1,
+    private val words1: ArrayList<String> = ArrayList(),
+    private val words2: ArrayList<String> = ArrayList(),
 ) : AbstractState(board){
     override val gameResult: String? = null
     constructor(str:String) : this(board = Board("          $str          ")){
@@ -14,12 +14,11 @@ class StateBalda(
     }
 
     override fun checkStep(step: Step): Boolean {
-        if (step.param.size == 2){
+        return if (step.param.size == 2){
             super.checkStep(step)
-            return true
-        }
-        else
-            return false
+            true
+        } else
+            false
     }
 
     override fun nextState(step: Step): AbstractState {

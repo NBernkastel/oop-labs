@@ -15,21 +15,20 @@ class MultiGame(state: AbstractState) {
         }
 
     fun step(step: Step): Boolean {
-        if(indexState >= states.lastIndex)
+        if (indexState >= states.lastIndex)
             states.add(state.copyState())
         indexState++
         return if (state.step(step) != null) {
             if (indexState >= states.lastIndex) {
                 states[indexState] = state
                 state.toString()
-                if (state.gameResult != null){
+                if (state.gameResult != null) {
                     gameOver = true
                 }
-            }
-            else {
+            } else {
                 states[indexState] = state
                 state.toString()
-                if (state.gameResult != null){
+                if (state.gameResult != null) {
                     gameOver = true
                 }
             }
@@ -38,12 +37,11 @@ class MultiGame(state: AbstractState) {
             false
         }
     }
-    
+
     fun takeBack(shift: Int): Boolean {
         return if (indexState - shift >= 0) {
             indexState -= (shift)
-            while (states.lastIndex!=indexState)
-            {
+            while (states.lastIndex != indexState) {
                 states.removeAt(states.lastIndex)
             }
             true
@@ -51,8 +49,10 @@ class MultiGame(state: AbstractState) {
     }
 
     override fun toString(): String {
-        return if (gameOver) state.gameResult!! else {
+        return if (gameOver) state.gameResult!! else if (!test) {
             "Состояние\n${states[indexState]} Номер хода $indexState\n"
+        } else {
+            return ""
         }
     }
 }

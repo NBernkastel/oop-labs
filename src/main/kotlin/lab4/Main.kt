@@ -7,7 +7,7 @@ import java.io.PrintStream
 
 val outputConsole: PrintStream =
     PrintStream(System.out, true, "UTF-8")
-
+var test = true
 fun main() {
     //game(stateStart = StateXO(Board("         "),'X'))
     Board.size = 5
@@ -18,12 +18,11 @@ fun game(inputStream: InputStream = System.`in`, output: PrintStream = outputCon
     val reader = BufferedReader(inputStream.reader())
     val game = MultiGame(stateStart)
     while (!game.gameOver) {
-        var input = Input.parse(reader.readLine())
-        when (input) {
+        when (val input = Input.parse(reader.readLine())) {
             is Exit -> return
             is Step -> game.step(input)
             is TakeBack -> game.takeBack(input.shift)
         }
-        print(game)
+        output.print(game)
     }
 }
