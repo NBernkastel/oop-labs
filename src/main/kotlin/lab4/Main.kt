@@ -7,7 +7,7 @@ import java.io.PrintStream
 
 val outputConsole: PrintStream =
     PrintStream(System.out, true, "UTF-8")
-var test = true
+var test = false
 fun main() {
     //game(stateStart = StateXO(Board("         "),'X'))
     Board.size = 5
@@ -20,7 +20,7 @@ fun game(inputStream: InputStream = System.`in`, output: PrintStream = outputCon
     while (!game.gameOver) {
         when (val input = Input.parse(reader.readLine())) {
             is Exit -> return
-            is Step -> game.step(input)
+            is Step -> if(game.step(input)) game.step(input) else {output.print("неверный ход\n");continue}
             is TakeBack -> game.takeBack(input.shift)
         }
         output.print(game)

@@ -16,7 +16,6 @@ class StateBalda(
     override fun checkStep(step: Step): Boolean {
         return if (step.param.size == 2){
             super.checkStep(step)
-            true
         } else
             false
     }
@@ -36,10 +35,6 @@ class StateBalda(
     }
 
     override fun toString(): String {
-        return if (board.isFill) {
-            ("Ничья!")
-        } else {
-            return (board.toString())
-        }
+        return (board.toString())
     }
 }

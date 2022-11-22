@@ -1,13 +1,11 @@
-package lab2
+package lab
 
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.collections.shouldBeIn
 import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
-import kotlin.math.PI
 
 var outputBuffer = ByteArrayOutputStream()
 var output = PrintStream(outputBuffer)

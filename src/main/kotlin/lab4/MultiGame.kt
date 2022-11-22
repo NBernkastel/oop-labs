@@ -17,8 +17,9 @@ class MultiGame(state: AbstractState) {
     fun step(step: Step): Boolean {
         if (indexState >= states.lastIndex)
             states.add(state.copyState())
-        indexState++
         return if (state.step(step) != null) {
+            indexState++
+            state.step(step)
             if (indexState >= states.lastIndex) {
                 states[indexState] = state
                 state.toString()
