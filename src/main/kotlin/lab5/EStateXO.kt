@@ -1,19 +1,18 @@
 package lab5
 
 import lab3.Board
-import lab4.Step
 
-class EStateXO (board:lab3.Board, private var turn:Char) : EAbstractState(board){
+class EStateXO (board:lab3.Board, private var turn:Turn) : EAbstractState(board){
     override var gameResult: String? = null
 
     override fun copyState(): EAbstractState {
         return EStateXO(Board(board),turn)
     }
     init {
-        turn = if(turn == 'X') '0' else 'X'
+        turn = Turn.X.next(turn.toString().last())
     }
     override fun nextState(step: Step): EAbstractState {
-        return EStateXO(board.setAndCopy(step.point,turn),turn)
+        return EStateXO(board.setAndCopy(step.point,turn.toString().last()),turn)
     }
 
     override fun toString(): String {

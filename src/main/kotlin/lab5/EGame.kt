@@ -1,7 +1,7 @@
 package lab5
 
 class EGame(state: EAbstractState) {
-    private val states = ArrayList<EAbstractState>()
+    private val states = StateList(state)
     private var indexState = 0
     var gameOver = false
 
@@ -9,49 +9,22 @@ class EGame(state: EAbstractState) {
         states.add(state)
     }
 
-    private val state: AbstractState
-        get() {
-            return states[indexState]
+    fun step(step: Step) {
+        states.add(states.state.copyState())
+        states.state.step(step)
+        indexState++
         }
 
-    fun step(step: Step): Boolean {
-        if (indexState >= states.lastIndex)
-            states.add(state.copyState())
-        return if (state.step(step) != null) {
-            indexState++
-            state.step(step)
-            if (indexState >= states.lastIndex) {
-                states[indexState] = state
-                state.toString()
-                if (state.gameResult != null) {
-                    gameOver = true
-                }
-            } else {
-                states[indexState] = state
-                state.toString()
-                if (state.gameResult != null) {
-                    gameOver = true
-                }
+    fun takeBack(shift: Int) {
+        indexState -= shift
+        while (states.array.lastIndex != indexState) {
+            states.array.removeAt(states.array.lastIndex)
             }
-            true
-        } else {
-            false
-        }
-    }
-
-    fun takeBack(shift: Int): Boolean {
-        return if (indexState - shift >= 0) {
-            indexState -= (shift)
-            while (states.lastIndex != indexState) {
-                states.removeAt(states.lastIndex)
-            }
-            true
-        } else false
     }
 
     override fun toString(): String {
-        return if (gameOver) state.gameResult!! else if (!test) {
-            "Состояние\n${states[indexState]} Номер хода $indexState\n"
+        return if (gameOver) states.state.gameResult!! else if (!test) {
+            "Состояние\n${states.state} Номер хода $indexState\n"
         } else {
             return ""
         }

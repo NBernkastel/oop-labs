@@ -1,7 +1,6 @@
 package lab5
 
 import lab3.Board
-import lab4.Step
 
 class EStateBalda(
     board:Board,
@@ -14,14 +13,14 @@ class EStateBalda(
         Board.size = 5
     }
 
-    override fun checkStep(step: Step) {
+    override fun checkStep(step: lab5.Step) {
         if (step.param.size == 2){
             super.checkStep(step)
         } else
-            WrongCommandException
+            throw WrongCommandException
     }
 
-    override fun nextState(step: Step): EAbstractState {
+    override fun nextState(step: lab5.Step): EAbstractState {
         if(turn == 1) words1.add(step.param[1]) else words2.add(step.param[1])
         return EStateBalda(
             board = board.setAndCopy(step.point,step.param[0][0]),
