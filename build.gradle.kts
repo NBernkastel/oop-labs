@@ -16,6 +16,7 @@ dependencies {
     testImplementation(
         "io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:4.6.0")
+    implementation("io.arrow-kt:arrow-core:1.1.2")
 }
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()

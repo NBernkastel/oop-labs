@@ -1,5 +1,6 @@
-package lab5
+package dop
 
+import arrow.core.Either
 import lab3.Board
 
 class EStateBalda(
@@ -13,14 +14,15 @@ class EStateBalda(
         Board.size = 5
     }
 
-    override fun checkStep(step: lab5.Step) {
+    override fun checkStep(step: Step): Either<String, Nothing> {
         if (step.param.size == 2){
             super.checkStep(step)
+            return Either.Left("")
         } else
-            throw WrongCommandException("не хватает параметров для хода")
+            return Either.Left("не хватает параметров для хода")
     }
 
-    override fun nextState(step: lab5.Step): EAbstractState {
+    override fun nextState(step: Step): EAbstractState {
         if(turn == 1) words1.add(step.param[1]) else words2.add(step.param[1])
         return EStateBalda(
             board = board.setAndCopy(step.point,step.param[0][0]),

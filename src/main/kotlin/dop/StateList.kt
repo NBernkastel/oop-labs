@@ -1,4 +1,4 @@
-package lab5
+package dop
 
 class StateList<T>( init: T, val array: ArrayList<T> = ArrayList()) {
     val state:T

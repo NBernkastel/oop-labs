@@ -1,4 +1,4 @@
-package lab5
+package dop
 
 import lab3.Board
 import java.io.BufferedReader

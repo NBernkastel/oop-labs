@@ -1,4 +1,4 @@
-package lab5
+package dop
 
 sealed interface Input{
     companion object{

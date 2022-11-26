@@ -6,8 +6,8 @@ abstract class EAbstractState(val board:Board){
     abstract fun copyState(): EAbstractState
     open fun checkStep(step: Step){
         when {
-            (step.y >= Board.size || step.x >= Board.size) ||  (step.y < 0 || step.x <0) -> throw NoCellException
-            board[step.point] != ' ' -> throw WrongStepException()
+            (step.y >= Board.size || step.x >= Board.size) ||  (step.y < 0 || step.x <0) -> throw NoCellException("клетка за пределами поля")
+            board[step.point] != ' ' -> throw WrongStepException("клетка занята")
         }
     }
     abstract fun nextState(step: Step): EAbstractState
