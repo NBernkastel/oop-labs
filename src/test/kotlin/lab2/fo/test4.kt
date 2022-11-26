@@ -1,4 +1,4 @@
-package lab.fo
+package lab2.fo
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe

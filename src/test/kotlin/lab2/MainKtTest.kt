@@ -1,4 +1,4 @@
-package lab
+package lab2
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.doubles.plusOrMinus

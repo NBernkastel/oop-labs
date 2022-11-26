@@ -1,4 +1,4 @@
-package lab
+package lab2
 
 import java.io.BufferedReader
 import kotlin.math.*
